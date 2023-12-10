@@ -18,40 +18,6 @@ services:
         networks:
         - app-network
 
-    notebook-ml:
-        image: quay.io/jupyter/scipy-notebook:python-3.11
-        container_name: notebook-ml
-        hostname: notebook-ml
-        working_dir: /app
-        tty: true
-        env_file: .env
-        environment:
-        - PYTHONPATH=/app/src
-        volumes:
-        - .:/app:delegated
-        - home:/home/$LOCAL_USER_NAME
-        ports:
-        - 8888:8888
-        networks:
-        - app-network
-
-    notebook-dl:
-        image: quay.io/jupyter/tensorflow-notebook:python-3.11
-        container_name: notebook-ml
-        hostname: notebook-ml
-        working_dir: /app
-        tty: true
-        env_file: .env
-        environment:
-        - PYTHONPATH=/app/src
-        volumes:
-        - .:/app:delegated
-        - home:/home/$LOCAL_USER_NAME
-        ports:
-        - 8888:8888
-        networks:
-        - app-network
-
 volumes:
     home:
 
