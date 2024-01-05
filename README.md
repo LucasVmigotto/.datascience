@@ -102,7 +102,7 @@ Given the fact that is a long command to type every time, you maybe would like t
 
 ```bash
 cat <<EOF >> $HOME/.bashrc
-BASE_CMD="docker run --name 'notebook' --hostname 'notebook' --workdir '/app' --volume './:/app:delegated' --network 'bridge' --publish '8888:8888' --rm"
+BASE_CMD="docker run --name 'notebook' --hostname 'notebook' --workdir '/app' --volume './:/app:delegated' --network 'bridge' --publish '8888:8888' --env GRANT_USER=yes --rm"
 alias docker-notebook-ml="$BASE_CMD quay.io/jupyter/datascience-notebook:python-3.11"
 alias docker-notebook-dl-tf="$BASE_CMD quay.io/jupyter/tensorflow-notebook:python-3.11"
 alias docker-notebook-dl-pt="$BASE_CMD quay.io/jupyter/pytorch-notebook:python-3.11"
