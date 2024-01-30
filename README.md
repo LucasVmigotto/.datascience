@@ -102,12 +102,12 @@ Given the fact that is a long command to type every time, you maybe would like t
 
 ```bash
 cat <<EOF >> $HOME/.bashrc
-_BASE_CMD="docker run --name 'notebook' --hostname 'notebook' --workdir '/app' --volume './:/app:delegated' --network 'bridge' --publish '8888:8888' --env GRANT_USER=yes --rm"
+_BASE_CMD="docker run --name 'notebook' --hostname 'notebook' --volume './:/home/jovyan' --network 'bridge' --publish '8888:8888' --env GRANT_USER=yes --rm"
 alias docker-notebook-ml="${_BASE_CMD} quay.io/jupyter/datascience-notebook:python-3.11"
 alias docker-notebook-dl-tf="${_BASE_CMD} quay.io/jupyter/tensorflow-notebook:python-3.11"
 alias docker-notebook-dl-pt="${_BASE_CMD} quay.io/jupyter/pytorch-notebook:python-3.11"
-alias docker-notebook-python="${_BASE_CMD} quay.io/jupyter/datascience-notebook:python-3.11"
-alias docker-notebook-r="${_BASE_CMD} quay.io/jupyter/scipy-notebook:python-3.11:python-3.11"
+alias docker-notebook-python="${_BASE_CMD} quay.io/jupyter/scipy-notebook:python-3.11"
+alias docker-notebook-r="${_BASE_CMD} quay.io/jupyter/r-notebook:python-3.11:python-3.11"
 alias docker-notebook-julia="${_BASE_CMD} quay.io/jupyter/julia-notebook:python-3.11"
 alias docker-notebook-ps="${_BASE_CMD} quay.io/jupyter/pyspark-notebook:python-3.11"
 EOF

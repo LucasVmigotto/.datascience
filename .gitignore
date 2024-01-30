@@ -88,3 +88,8 @@ target/
 
 # Mypy cache
 .mypy_cache/
+
+.ipython/
+.jupyter/
+.local/
+.npm/
