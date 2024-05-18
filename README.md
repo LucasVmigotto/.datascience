@@ -1,176 +1,146 @@
 # template-datascience
 
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
+
+
 Template for Data Science, Machine Learning and Deep Learning projects
 
-## Summary
+## Getting started
 
-1. [Start Jupyter with Docker](#start-jupyter-with-docker)
-2. [Python base env to `src/` dir](#python-base-env-to-src-dir)
-3. [Project organization](#project-organization)
+Clone the repository into the desire folder
 
-## Start [Jupyter](https://jupyter.org/) with [Docker](https://www.docker.com/get-started/)
-
-### Image options
-
-> Give it a try with the tag `python-3.11` or `ubuntu-22.04`
-
-1. Machine Learning
-
-    * Python, R and Julia
-
-        * Pull the [image](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-datascience-notebook)
-
-            ```bash
-            docker pull quay.io/jupyter/datascience-notebook
-            ```
-
-    * [Python](https://www.python.org/)
-
-        * Pull the [image](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-scipy-notebook)
-
-            ```bash
-            docker pull
-            ```
-
-    * [R](https://www.r-project.org/)
-
-        * Pull the [image](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-r-notebook)
-
-            ```bash
-            docker pull quay.io/jupyter/r-notebook
-            ```
-
-    * [Julia](https://julialang.org/)
-
-        * Pull the [image](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-julia-notebook)
-
-            ```bash
-            docker pull quay.io/jupyter/julia-notebook
-            ```
-
-2. Deep Learning
-
-    * [TensorFlow](https://www.tensorflow.org/)
-
-        * Pull the [image](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-tensorflow-notebook)
-
-        ```bash
-        docker pull quay.io/jupyter/tensorflow-notebook
-        ```
-
-    * [PyTorch](https://pytorch.org/)
-
-        * Pull the [image](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-pytorch-notebook)
-
-        ```bash
-        docker pull quay.io/jupyter/pytorch-notebook
-        ```
-
-3. [PySpark](https://spark.apache.org/docs/latest/api/python/index.html)
-
-    * Pull the [image](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-pyspark-notebook)
-
-        ```bash
-        docker pull quay.io/jupyter/pyspark-notebook
-        ```
-
-### Docker run command base
-
-Run the following command inside your project folder to start the container
-
-```bash
-docker run \
-    --name 'notebook' \
-    --hostname 'notebook' \
-    --workdir '/app' \
-    --volume './:/app:delegated' \
-    --network 'bridge' \
-    --publish '8888:8888' \
-    --rm \
-    {{ YOUR IMAGE AND TAG GOES HERE }}
-```
-
-> The container will interrupt your terminal. If you want to avoid this, use the `-d` after the `run` command to run the container in detach mode. Take notice that, if in detach mode, the token used to connect to the server will not be displayed.
-
-#### Bash aliases
-
-Given the fact that is a long command to type every time, you maybe would like to create bash aliases to make things easier. The following code demonstrate an example of how to do it:
-
-> Depend if you use some other shell (e.g. [ZSH](https://www.zsh.org/)), you will need edit the code to redirect the output to the correct rc file
->
-> **PLEASE PAY ATTENTION**, make sure to use `>>` instead of `>`. Otherwise, you will overwrite **EVERYTHING** inside your shell rc file
-
-```bash
-cat <<EOF >> $HOME/.bashrc
-_BASE_CMD="docker run --name 'notebook' --hostname 'notebook' --volume './:/home/jovyan' --network 'bridge' --publish '8888:8888' --env GRANT_USER=yes --rm"
-alias docker-notebook-ml="${_BASE_CMD} quay.io/jupyter/datascience-notebook:python-3.11"
-alias docker-notebook-dl-tf="${_BASE_CMD} quay.io/jupyter/tensorflow-notebook:python-3.11"
-alias docker-notebook-dl-pt="${_BASE_CMD} quay.io/jupyter/pytorch-notebook:python-3.11"
-alias docker-notebook-python="${_BASE_CMD} quay.io/jupyter/scipy-notebook:python-3.11"
-alias docker-notebook-r="${_BASE_CMD} quay.io/jupyter/r-notebook:python-3.11:python-3.11"
-alias docker-notebook-julia="${_BASE_CMD} quay.io/jupyter/julia-notebook:python-3.11"
-alias docker-notebook-ps="${_BASE_CMD} quay.io/jupyter/pyspark-notebook:python-3.11"
-EOF
-```
-
-### Notes
-
-* If not modified, the default config starts Juyter on [127.0.0.1:8888](http://127.0.0.1:8888/lab)
-* If you're interested in using VS Code as Jupyter Notebook's editor, make sure to get URL and Token credential in the container logs to successfully connect to the kernel. Look for something like: `http://127.0.0.1:8888/lab?token=<TOKEN_HASH>`
-
-## Python base env to `src/` dir
-
-### How to use with [Docker](https://www.docker.com/get-started/)
-
-* Starting the project
+* With `ssh`
 
     ```bash
-    docker compose up [-d] app
+    git clone git@github.com:LucasVmigotto/template-datascience.git
     ```
 
-* Enter the command line interface with bash inside the container
+* With `HTTPS`
 
     ```bash
-    docker compose run --rm app
+    git clone https://github.com/LucasVmigotto/template-datascience.git
     ```
 
-## Project organization
+* With GitHub CLI
 
-```txt
+    ```bash
+    gh repo clone LucasVmigotto/template-datascience
+    ```
 
-    ├── LICENSE
-    ├── README.md          <- The top-level README for developers using this project.
-    ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
-    │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
-    │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
-    │
-    └── src                <- Source code for use in this project.
-        │
-        ├── data           <- Scripts to download or generate data
-        │   └── make_dataset.py
-        │
-        ├── features       <- Scripts to turn raw data into features for modeling
-        │   └── build_features.py
-        │
-        ├── models         <- Scripts to train models and then use trained models to make
-        │   │                 predictions
-        │   ├── predict_model.py
-        │   └── train_model.py
-        │
-        └── visualization  <- Scripts to create exploratory and results oriented visualizations
-            └── visualize.py
+## Development
 
+This template project aims to help, and bootstrap, the development of data science projects creating an environment with commonly tools and necessities required - such as a [Linux](https://www.linux.org/)  operational system, [_Jupyter Notebooks_](https://jupyter.org/) and _LLM_ models.
 
+Although you can clone and get started with only the [Docker](https://www.docker.com/), it is highly recommended that you take advantage of the excellent tool that is the [Visual Studio Code](https://code.visualstudio.com/) support to Docker's Containers based development with [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers).
+
+Inside `.devcontainer` folder, there is a `devcontainer.json` specification file that take care of providing you with all the tools early listed to a data science project. In case of need, it is possible to deactivate, separably, the services that can be ignored depending of the scenario. Thus, just comment in the `runsServices` key that services you do not want to be initiated with the development container.
+
+### Pre requisites
+
+#### Mandatory
+
+* [Docker Engine](https://docs.docker.com/engine/)
+
+#### Recommended
+
+* [Docker Compose](https://docs.docker.com/compose/)
+
+#### Optional
+
+* [Visual Studio Code](https://code.visualstudio.com/)
+* [VSCode Extension Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+
+### Using Docker
+
+#### App
+
+This is a basic environment prepared to start some application development. It comes with [Python](https://www.python.org/), [`git`](https://git-scm.com/) and [`zsh`](https://www.zsh.org/) with [Oh My Zsh](https://ohmyz.sh/)!
+
+#### [Conda](https://conda.io/projects/conda/en/latest/user-guide/getting-started.html) (Jupyter)
+
+With this service, you can connect to a Jupyter Environment and use it to test ideias in Jupyter Notebooks. It is possible to connect, when editing a `.ipynb` file inside Visual Studio Code, to the Jupyter Server just informing the connection URL `http://conda:8888`
+
+> You can, as well, access the browser Jupyter Notebook version in [localhost:8888](http://localhost:8888)
+
+#### [Ollama](https://ollama.com/)
+
+This service has few direct use not considering the connection inside a Notebook consuming a model for example. But it is possible to direct interact with the service using the CLI interface with the following command:
+
+```bash
+docker compose exec ollama ollama run ollama3 # Or, any other model that has been pulled already before
 ```
 
-> Project based on the [cookiecutter data science project template](https://drivendata.github.io/cookiecutter-data-science). #cookiecutterdatascience
+##### Pulling Models
+
+The service, at first time, start without any model already downloaded. To download a model, you can make a request to the Ollama's API the pull the desired model. The following example shows how would be to pull the [llama3 8B](https://ollama.com/library/llama3:8b):
+
+```bash
+curl http://localhost:11434/api/pull \
+    -d '{ "model": "llama3" }'
+```
+
+> This example consider that the command will be executed inside a terminal in the host.
 >
-> **Lucas Vidor Migotto - December, 2023**
+> If you want to execute inside a terminal in the Visual Studio Code, change the request URL to `http://ollama:11414/api/pull` - in this case, it is necessary to consider the hostname inside the Docker network that binds all the services.
+
+#### [Open WebUI](https://docs.openwebui.com/)
+
+You can acess [locahost:8080](http://localhost:8080) to get access into the Open WebUI visual interface and test the models pulled with Ollama.
+
+#### Docker Troubleshooting
+
+List all Docker containers
+
+```bash
+docker ps -a
+```
+
+Remove Docker Compose containers
+
+```bash
+docker compose rm --stop -f
+```
+
+Prune containers
+
+```bash
+docker container prune --force
+```
+
+List all Docker images
+
+```bash
+docker ls -a
+```
+
+Remove Docker _dangling_ images
+
+```bash
+docker image rm -f $(docker image ls --filter "dangling=true" -aq)
+```
+
+List all Docker volumes
+
+```bash
+docker volume ls
+```
+
+Prune Docker volumes
+
+```bash
+docker volume prune --force
+```
+
+> **WARNING**: If you want to remove **ALL** Docker images, just remove the `--filter` flag and argument
+>
+> `docker image rm -f $(docker image ls -aq)`
+
+## References
+
+* [Visual Studio Code Dev Container creation](https://code.visualstudio.com/docs/devcontainers/create-dev-container)
+* [Dev Container](https://containers.dev/)
+* [Dev Container images](https://github.com/devcontainers/images/tree/main/src)
+* [Docker](https://docs.docker.com/)
+* [Jupyter Server](https://jupyter-server.readthedocs.io/en/latest/)
+* [Ollama](https://github.com/ollama/ollama/tree/main/docs)
+* [Open WebUI](https://docs.openwebui.com/)
