@@ -1,9 +1,8 @@
-# template-datascience
+# datascience
 
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
 
-
-Template for Data Science, Machine Learning and Deep Learning projects
+Template for Data Science, Machine Learning and Deep Learning projects.
 
 ## Getting started
 
@@ -12,19 +11,19 @@ Clone the repository into the desire folder
 * With `ssh`
 
     ```bash
-    git clone git@github.com:LucasVmigotto/template-datascience.git
+    git clone git@github.com:LucasVmigotto/datascience.git
     ```
 
 * With `HTTPS`
 
     ```bash
-    git clone https://github.com/LucasVmigotto/template-datascience.git
+    git clone https://github.com/LucasVmigotto/datascience.git
     ```
 
 * With GitHub CLI
 
     ```bash
-    gh repo clone LucasVmigotto/template-datascience
+    gh repo clone LucasVmigotto/datascience
     ```
 
 ## Development
