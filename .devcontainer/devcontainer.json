@@ -1,0 +1,41 @@
+{
+    "name": "template-datascience",
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "app",
+    "runServices": [
+        "ollama",
+        "ollama-webui",
+        "conda"
+    ],
+    "workspaceFolder": "/app",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "almenon.arepl",
+                "njpwerner.autodocstring",
+                "JannisX11.batch-rename-extension",
+                "phplasma.csv-to-table",
+                "ms-azuretools.vscode-docker",
+                "EditorConfig.EditorConfig",
+                "mhutchie.git-graph",
+                "ms-python.isort",
+                "ms-toolsai.jupyter",
+                "ms-toolsai.vscode-jupyter-powertoys",
+                "ms-toolsai.jupyter-hub",
+                "ms-python.flake8",
+                "DavidAnson.vscode-markdownlint",
+                "Cardinal90.multi-cursor-case-preserve",
+                "ryu1kn.partial-diff",
+                "mohsen1.prettify-json",
+                "humao.rest-client",
+                "njzy.stats-bar",
+                "streetsidesoftware.code-spell-checker",
+                "streetsidesoftware.code-spell-checker-portuguese-brazilian",
+                "christian-kohler.path-intellisense",
+                "redhat.vscode-yaml",
+                "tamasfe.even-better-toml",
+                "ms-python.autopep8"
+            ]
+        }
+    }
+}
