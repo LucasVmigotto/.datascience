@@ -47,9 +47,12 @@ services:
     - datascience-env
 
   app:
-    image: mcr.microsoft.com/devcontainers/python:3.11
+    build:
+      context: .
+      dockerfile: ./.devcontainer/Dockerfile
     container_name: app
     hostname: app
+    working_dir: /app
     user: vscode
     tty: true
     volumes:
