@@ -13,17 +13,17 @@ services:
     networks:
     - datascience-env
 
-  ollama-webui:
+  open-webui:
     image: ghcr.io/open-webui/open-webui:main
-    container_name: ollama-webui
-    hostname: ollama-webui
+    container_name: open-webui
+    hostname: open-webui
     environment:
     - WEBUI_AUTH=false
     - OLLAMA_API_BASE_URL=http://ollama:11434/api'
     ports:
     - 8080:8080
     volumes:
-    - ollama-webui:/app/backend/data
+    - open-webui:/app/backend/data
     depends_on:
     - ollama
     extra_hosts:
@@ -50,6 +50,7 @@ services:
     image: mcr.microsoft.com/devcontainers/python:3.11
     container_name: app
     hostname: app
+    user: vscode
     tty: true
     volumes:
     - .:/app:cached
@@ -59,7 +60,7 @@ services:
 volumes:
   home:
   ollama:
-  ollama-webui:
+  open-webui:
 
 networks:
   datascience-env:

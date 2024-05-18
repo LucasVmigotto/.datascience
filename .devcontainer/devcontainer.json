@@ -4,7 +4,7 @@
     "service": "app",
     "runServices": [
         "ollama",
-        "ollama-webui",
+        "open-webui",
         "conda"
     ],
     "workspaceFolder": "/app",
