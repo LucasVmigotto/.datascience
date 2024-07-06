@@ -10,8 +10,8 @@ charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-[*.{py,yml}]
-indent_size = 2
+[*.{yml}]
+indent_size = 4
 
-[*.{json}]
+[*.{py,json}]
 indent_size = 4
