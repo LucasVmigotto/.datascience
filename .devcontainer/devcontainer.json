@@ -5,7 +5,7 @@
     "runServices": [
         "ollama",
         "open-webui",
-        "conda"
+        "jupyter"
     ],
     "workspaceFolder": "/app",
     "customizations": {
@@ -22,7 +22,6 @@
                 "ms-toolsai.jupyter",
                 "ms-toolsai.vscode-jupyter-powertoys",
                 "ms-toolsai.jupyter-hub",
-                "ms-python.flake8",
                 "DavidAnson.vscode-markdownlint",
                 "Cardinal90.multi-cursor-case-preserve",
                 "ryu1kn.partial-diff",
