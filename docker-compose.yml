@@ -5,23 +5,24 @@ services:
     container_name: ollama
     hostname: ollama
     ports:
-    - 11434:11434
+    - $OLLAMA__PORT:$OLLAMA__PORT
     volumes:
     - ollama:/root/.ollama
     tty: true
     restart: always
     networks:
-    - datascience-env
+    - datascience-network
 
   open-webui:
     image: ghcr.io/open-webui/open-webui:main
     container_name: open-webui
     hostname: open-webui
+    env_file: .env
     environment:
-    - WEBUI_AUTH=false
-    - OLLAMA_API_BASE_URL=http://ollama:11434/api'
+      WEBUI_AUTH: $OPENWEBUI__WEBUI_AUTH
+      OLLAMA_API_BASE_URL: $OPENWEBUI__OLLAMA_API_BASE_URL
     ports:
-    - 8080:8080
+    - $OPENWEBUI__PORT:$OPENWEBUI__PORT
     volumes:
     - open-webui:/app/backend/data
     depends_on:
@@ -29,22 +30,32 @@ services:
     extra_hosts:
     - host.docker.internal:host-gateway
     networks:
-    - datascience-env
+    - datascience-network
 
-  conda:
-    image: mcr.microsoft.com/devcontainers/anaconda:0-3
-    container_name: conda
-    hostname: conda
-    working_dir: /app
-    command: nohup bash -c 'jupyter notebook --ip=0.0.0.0 --port=8888 --NotebookApp.token="" --allow-root'
+  jupyter:
+    # image: quay.io/jupyter/pytorch-notebook:python-3.11
+    # image: quay.io/jupyter/all-spark-notebook:python-3.11
+    # image: quay.io/jupyter/tensorflow-notebook:python-3.11
+    # image: quay.io/jupyter/pytorch-notebook:python-3.11
+    image: quay.io/jupyter/datascience-notebook:python-3.11
+    container_name: jupyter
+    hostname: jupyter
+    command: start-notebook.py --ServerApp.token=""
+    tty: true
+    env_file: .env
     environment:
-    - PYTHONPATH=/app/src
+      NB_GID: $JUPYTER__NB_GID
+      NB_UID: $JUPYTER__NB_UID
+      NB_NAME: $JUPYTER__NB_NAME
+      GRANT_SUDO: $JUPYTER__GRANT_SUDO
+      JUPYTER_PORT: $JUPYTER__PORT
+      NOTEBOOK_ARGS: $JUPYTER__NOTEBOOK_ARGS
     volumes:
-    - .:/app:cached
+    - .:/app
     ports:
-    - 8888:8888
+    - $JUPYTER__PORT:$JUPYTER__PORT
     networks:
-    - datascience-env
+    - jupyter-network
 
   app:
     build:
@@ -56,9 +67,10 @@ services:
     user: vscode
     tty: true
     volumes:
-    - .:/app:cached
+    - .:/app
     networks:
-    - datascience-env
+    - jupyter-network
+    - datascience-network
 
 volumes:
   home:
@@ -66,4 +78,5 @@ volumes:
   open-webui:
 
 networks:
-  datascience-env:
+  datascience-network:
+  jupyter-network:

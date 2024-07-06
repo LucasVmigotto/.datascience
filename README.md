@@ -49,6 +49,13 @@ Inside `.devcontainer` folder, there is a `devcontainer.json` specification file
 * [Visual Studio Code](https://code.visualstudio.com/)
 * [VSCode Extension Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
+
+### Environment variables
+
+Copy and rename the `.env.example` file to `.env`.
+
+> Customize the values if necessary
+
 ### Using Docker
 
 #### App
@@ -57,7 +64,7 @@ This is a basic environment prepared to start some application development. It c
 
 #### [Conda](https://conda.io/projects/conda/en/latest/user-guide/getting-started.html) (Jupyter)
 
-With this service, you can connect to a Jupyter Environment and use it to test ideias in Jupyter Notebooks. It is possible to connect, when editing a `.ipynb` file inside Visual Studio Code, to the Jupyter Server just informing the connection URL `http://conda:8888`
+With this service, you can connect to a Jupyter Environment and use it to test ideias in Jupyter Notebooks. It is possible to connect, when editing a `.ipynb` file inside Visual Studio Code, to the Jupyter Server just informing the connection URL `http://jupyter:8888`
 
 > You can, as well, access the browser Jupyter Notebook version in [localhost:8888](http://localhost:8888)
 
