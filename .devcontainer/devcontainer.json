@@ -1,39 +1,43 @@
 {
-    "name": "template-datascience",
+    "name": "datascience",
     "dockerComposeFile": "../docker-compose.yml",
     "service": "app",
     "runServices": [
         "ollama",
-        "open-webui",
+        "open_webui",
+        // "neo4j",
+        // "elastic_search",
         "jupyter"
     ],
     "workspaceFolder": "/app",
     "customizations": {
         "vscode": {
             "extensions": [
-                "almenon.arepl",
-                "njpwerner.autodocstring",
-                "JannisX11.batch-rename-extension",
-                "phplasma.csv-to-table",
-                "ms-azuretools.vscode-docker",
-                "EditorConfig.EditorConfig",
-                "mhutchie.git-graph",
-                "ms-python.isort",
+                // Development
                 "ms-toolsai.jupyter",
                 "ms-toolsai.vscode-jupyter-powertoys",
-                "ms-toolsai.jupyter-hub",
-                "DavidAnson.vscode-markdownlint",
+                "almenon.arepl",
+                // Environment
                 "Cardinal90.multi-cursor-case-preserve",
                 "ryu1kn.partial-diff",
-                "mohsen1.prettify-json",
-                "humao.rest-client",
-                "njzy.stats-bar",
-                "streetsidesoftware.code-spell-checker",
-                "streetsidesoftware.code-spell-checker-portuguese-brazilian",
                 "christian-kohler.path-intellisense",
-                "redhat.vscode-yaml",
-                "tamasfe.even-better-toml",
-                "ms-python.autopep8"
+                "JannisX11.batch-rename-extension",
+                "njzy.stats-bar",
+                // Utils
+                "ms-toolsai.datawrangler",
+                "phplasma.csv-to-table",
+                "humao.rest-client",
+                "mhutchie.git-graph",
+                "neo4j-extensions.neo4j-for-vscode",
+                // Style and formatting
+                "charliermarsh.ruff",
+                "DavidAnson.vscode-markdownlint",
+                "mohsen1.prettify-json",
+                "EditorConfig.EditorConfig",
+                "ms-python.isort",
+                // Language
+                "streetsidesoftware.code-spell-checker",
+                "streetsidesoftware.code-spell-checker-portuguese-brazilian"
             ]
         }
     }
