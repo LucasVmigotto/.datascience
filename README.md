@@ -11,19 +11,19 @@ Clone the repository into the desire folder
 * With `ssh`
 
     ```bash
-    git clone git@github.com:LucasVmigotto/datascience.git
+    git clone git@github.com:LucasVmigotto/.datascience.git
     ```
 
 * With `HTTPS`
 
     ```bash
-    git clone https://github.com/LucasVmigotto/datascience.git
+    git clone https://github.com/LucasVmigotto/.datascience.git
     ```
 
 * With GitHub CLI
 
     ```bash
-    gh repo clone LucasVmigotto/datascience
+    gh repo clone LucasVmigotto/.datascience
     ```
 
 ## Development
@@ -39,16 +39,12 @@ Inside `.devcontainer` folder, there is a `devcontainer.json` specification file
 #### Mandatory
 
 * [Docker Engine](https://docs.docker.com/engine/)
-
-#### Recommended
-
 * [Docker Compose](https://docs.docker.com/compose/)
 
 #### Optional
 
 * [Visual Studio Code](https://code.visualstudio.com/)
 * [VSCode Extension Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
-
 
 ### Environment variables
 
@@ -62,11 +58,9 @@ Copy and rename the `.env.example` file to `.env`.
 
 This is a basic environment prepared to start some application development. It comes with [Python](https://www.python.org/), [`git`](https://git-scm.com/) and [`zsh`](https://www.zsh.org/) with [Oh My Zsh](https://ohmyz.sh/)!
 
-#### [Conda](https://conda.io/projects/conda/en/latest/user-guide/getting-started.html) (Jupyter)
+#### [Jupyter](https://jupyter.org/) (Jupyter)
 
-With this service, you can connect to a Jupyter Environment and use it to test ideias in Jupyter Notebooks. It is possible to connect, when editing a `.ipynb` file inside Visual Studio Code, to the Jupyter Server just informing the connection URL `http://jupyter:8888`
-
-> You can, as well, access the browser Jupyter Notebook version in [localhost:8888](http://localhost:8888)
+With this service, you can connect to a Jupyter Environment and use it to test ideias in Jupyter Notebooks. It is possible to connect, when editing a `.ipynb` file inside Visual Studio Code, to the Jupyter Server just informing the connection URL `http://jupyter:8888/tree`
 
 #### [Ollama](https://ollama.com/)
 
@@ -92,6 +86,14 @@ curl http://localhost:11434/api/pull \
 #### [Open WebUI](https://docs.openwebui.com/)
 
 You can acess [locahost:8080](http://localhost:8080) to get access into the Open WebUI visual interface and test the models pulled with Ollama.
+
+#### [Neo4j](https://neo4j.com/docs/)
+
+You can acess [locahost:7474](http://localhost:7474) to use the graphic interface and try some queries with the [Cipher query language](https://neo4j.com/docs/cypher-manual/current/introduction/).
+
+#### [Elastic Search](https://www.elastic.co/docs)
+
+You can acess [locahost:9200](http://localhost:9200) to verify the execution.
 
 #### Docker Troubleshooting
 
@@ -150,3 +152,5 @@ docker volume prune --force
 * [Jupyter Server](https://jupyter-server.readthedocs.io/en/latest/)
 * [Ollama](https://github.com/ollama/ollama/tree/main/docs)
 * [Open WebUI](https://docs.openwebui.com/)
+* [Elastic Search](https://www.elastic.co/docs)
+* [Neo4j](https://neo4j.com/docs/)
