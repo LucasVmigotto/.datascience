@@ -1,13 +1,15 @@
-FROM mcr.microsoft.com/devcontainers/python:3.11
+ARG APP__PYTHON_IMAGE_TAG
 
-ARG USERNAME='vscode'
-ARG POETRY_VERSION='1.8.3'
+FROM mcr.microsoft.com/devcontainers/python:$APP__PYTHON_IMAGE_TAG
 
-USER ${USERNAME}
+ARG APP__USERNAME
+ARG APP__POETRY_VERSION
+
+USER ${APP__USERNAME}
 
 WORKDIR /app
 
-RUN pipx install poetry==${POETRY_VERSION}
+RUN pipx install poetry==${APP__POETRY_VERSION}
 
 RUN pipx inject poetry poetry-plugin-export
 

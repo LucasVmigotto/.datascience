@@ -1,7 +1,7 @@
 services:
 
   ollama:
-    image: ollama/ollama:0.1.38
+    image: ollama/ollama:$OLLAMA__IMAGE_TAG
     container_name: ollama
     hostname: ollama
     ports:
@@ -11,12 +11,14 @@ services:
     tty: true
     restart: always
     networks:
+    - jupyter-network
     - datascience-network
 
-  open-webui:
-    image: ghcr.io/open-webui/open-webui:main
-    container_name: open-webui
-    hostname: open-webui
+
+  open_webui:
+    image: ghcr.io/open-webui/open-webui:$OPENWEBUI__IMAGE_TAG
+    container_name: open_webui
+    hostname: open_webui
     env_file: .env
     environment:
       WEBUI_AUTH: $OPENWEBUI__WEBUI_AUTH
@@ -24,7 +26,7 @@ services:
     ports:
     - $OPENWEBUI__PORT:$OPENWEBUI__PORT
     volumes:
-    - open-webui:/app/backend/data
+    - open_webui:/app/backend/data
     depends_on:
     - ollama
     extra_hosts:
@@ -32,12 +34,52 @@ services:
     networks:
     - datascience-network
 
+
+  elastic_search:
+    image: docker.elastic.co/elasticsearch/elasticsearch:$ELASTIC_SEARCH__IMAGE_TAG
+    container_name: elastic_search
+    hostname: elastic_search
+    env_file: .env
+    environment:
+      ELASTICSEARCH_USERNAME: $ELASTIC_SEARCH__ELASTICSEARCH_USERNAME
+      ELASTICSEARCH_PASSWORD: $ELASTIC_SEARCH__ELASTICSEARCH_PASSWORD
+      xpack.security.enabled: $ELASTIC_SEARCH__xpack_security_enabled
+      discovery.type: $ELASTIC_SEARCH__discovery_type
+    mem_limit: ${ELASTIC_SEARCH__MEM_LIMIT}
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+    - elastic_search:/usr/share/elasticsearch/data
+    ports:
+    - $ELASTIC_SEARCH__PORT:$ELASTIC_SEARCH__PORT
+    networks:
+    - datascience-network
+
+
+  neo4j:
+    image: neo4j:$NEO4J__IMAGE_TAG
+    container_name: neo4j
+    hostname: neo4j
+    env_file: .env
+    environment:
+      NEO4J_server_config_strict__validation_enabled: "False"
+    ports:
+    - $NEO4J__PORT_1:$NEO4J__PORT_1
+    - $NEO4J__PORT_2:$NEO4J__PORT_2
+    volumes:
+    - neo4j:/data
+    networks:
+    - datascience-network
+
+
   jupyter:
     # image: quay.io/jupyter/pytorch-notebook:python-3.11
     # image: quay.io/jupyter/all-spark-notebook:python-3.11
     # image: quay.io/jupyter/tensorflow-notebook:python-3.11
     # image: quay.io/jupyter/pytorch-notebook:python-3.11
-    image: quay.io/jupyter/datascience-notebook:python-3.11
+    image: quay.io/jupyter/datascience-notebook:$JUPYTER__IMAGE_TAG
     container_name: jupyter
     hostname: jupyter
     command: start-notebook.py --ServerApp.token=""
@@ -56,27 +98,38 @@ services:
     - $JUPYTER__PORT:$JUPYTER__PORT
     networks:
     - jupyter-network
+    - datascience-network
+
 
   app:
     build:
       context: .
       dockerfile: ./.devcontainer/Dockerfile
+      args:
+        APP__PYTHON_IMAGE_TAG: $APP__PYTHON_IMAGE_TAG
+        APP__POETRY_VERSION: $APP__POETRY_VERSION
+        APP__USERNAME: $APP__USERNAME
     container_name: app
     hostname: app
     working_dir: /app
     user: vscode
     tty: true
+    env_file: .env
     volumes:
     - .:/app
     networks:
-    - jupyter-network
     - datascience-network
+
 
 volumes:
   home:
   ollama:
-  open-webui:
+    external: true
+  open_webui:
+  neo4j:
+  elastic_search:
+
 
 networks:
-  datascience-network:
   jupyter-network:
+  datascience-network:
