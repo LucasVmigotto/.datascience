@@ -54,6 +54,16 @@ Copy and rename the `.env.example` file to `.env`.
 
 ### Using Docker
 
+### Before start
+
+* Create a Docker Volume named `ollama`:
+
+    ```bash
+    docker volume create ollama
+    ```
+
+    > Creating a main volume, you will be able to share the models between others ollama containers.
+
 #### App
 
 This is a basic environment prepared to start some application development. It comes with [Python](https://www.python.org/), [`git`](https://git-scm.com/) and [`zsh`](https://www.zsh.org/) with [Oh My Zsh](https://ohmyz.sh/)!
